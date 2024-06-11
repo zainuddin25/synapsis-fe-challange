@@ -1,4 +1,4 @@
-import { ChevronRight, Edit, Edit2, Eye, Trash2 } from "react-feather";
+import { ChevronRight } from "react-feather";
 
 type Props = {
   user_id?: number;

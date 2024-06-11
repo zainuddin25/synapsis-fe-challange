@@ -1,13 +1,10 @@
 "use client";
 import CardBlog from "@/components/CardBlog";
 import Pagination from "@/components/Pagination";
-import { addBlog } from "@/lib/features/blog";
-import { RootState } from "@/lib/store";
 import { BlogTypes } from "@/types";
 import axios from "axios";
 import Link from "next/link";
-import { ChangeEvent, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const apiUrl = process.env.API_URL;
 
@@ -15,7 +12,6 @@ const Home = () => {
   const [data, setData] = useState<BlogTypes[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(0);
-  const blogData = useSelector((state: RootState) => state.blog);
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -50,8 +46,8 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full mb-10">
-      <div className="flex justify-between items-center my-8">
+    <div className="w-full">
+      <div className="flex my-8">
         <h1 className="text-xl font-bold text-white">All Blogs</h1>
       </div>
       {isLoading ? (

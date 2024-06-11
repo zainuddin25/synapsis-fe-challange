@@ -21,7 +21,9 @@ const Header = () => {
           <Link
             href={"/"}
             className={`${
-              !pathname.includes("users") ? "text-white" : "text-white/50"
+              !pathname.includes("users") && !pathname.includes("my-blog")
+                ? "text-white"
+                : "text-white/50"
             } font-medium`}
           >
             Blogs
