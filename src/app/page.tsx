@@ -60,9 +60,11 @@ const Home = () => {
             {data.map((result) => (
               <Link href={`/blog/${result.id}`} key={result.id}>
                 <CardBlog
+                  post_id={result.id}
                   title={result.title}
                   body={result.body}
                   user_id={result.user_id}
+                  openDetail={() => {}}
                 />
               </Link>
             ))}

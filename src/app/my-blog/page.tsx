@@ -1,12 +1,10 @@
 "use client";
 import CardBlog from "@/components/CardBlog";
 import ModalCreate from "@/components/ModalCreate";
-import Pagination from "@/components/Pagination";
 import { addBlog } from "@/lib/features/blog";
 import { RootState } from "@/lib/store";
 import { BlogTypes } from "@/types";
 import axios from "axios";
-import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,7 +17,6 @@ const MyBlogsPage = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
-  const [page, setPage] = useState<number>(0);
   const createdData = useSelector((state: RootState) => state.blog.value);
   const data = createdData;
   const dispatch = useDispatch();
@@ -41,8 +38,6 @@ const MyBlogsPage = () => {
         }
       );
 
-      console.log(response);
-
       if (response.status == 201) {
         setIsOpenModal(false);
         setReloadPage(!reloadPage);
@@ -61,6 +56,15 @@ const MyBlogsPage = () => {
     }
   };
 
+  const handleOpenDetail = (id: number) => {
+    setIsOpenModal(true);
+    const detailData = data.find((item) => item.id == id);
+    if (detailData) {
+      setTitle(detailData.title);
+      setBody(detailData.body);
+    }
+  };
+
   const handleClose = () => {
     setIsOpenModal(false);
     setTitle("");
@@ -73,18 +77,6 @@ const MyBlogsPage = () => {
 
   const changeBody = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setBody(event.target.value);
-  };
-
-  const handleNextPage = () => {
-    setPage(page + 1);
-  };
-
-  const handlePrevPage = () => {
-    if (page == 0) {
-      setPage(0);
-    } else {
-      setPage(page - 1);
-    }
   };
 
   return (
@@ -107,9 +99,12 @@ const MyBlogsPage = () => {
           data.map((result) => (
             <CardBlog
               key={result.id}
+              post_id={result.id}
               title={result.title}
               body={result.body}
               user_id={result.user_id}
+              isCreate
+              openDetail={handleOpenDetail}
             />
           ))
         )}
