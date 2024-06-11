@@ -1,11 +1,11 @@
 "use client";
 import CardBlog from "@/components/CardBlog";
 import ModalCreate from "@/components/ModalCreate";
-import { addBlog } from "@/lib/features/blog";
+import { addBlog, updateBlog } from "@/lib/features/blog";
 import { RootState } from "@/lib/store";
 import { BlogTypes } from "@/types";
 import axios from "axios";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const apiUrl = process.env.API_URL;
@@ -17,6 +17,8 @@ const MyBlogsPage = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
+  const [blogId, setBlogId] = useState<number>(0);
+  const [typeModal, setTypeModal] = useState<string>("");
   const createdData = useSelector((state: RootState) => state.blog.value);
   const data = createdData;
   const dispatch = useDispatch();
@@ -43,6 +45,7 @@ const MyBlogsPage = () => {
         setReloadPage(!reloadPage);
         setTitle("");
         setBody("");
+        setTypeModal("");
         const data: BlogTypes = {
           id: response.data.id,
           user_id: response.data.user_id,
@@ -58,17 +61,34 @@ const MyBlogsPage = () => {
 
   const handleOpenDetail = (id: number) => {
     setIsOpenModal(true);
+    setTypeModal("detail");
     const detailData = data.find((item) => item.id == id);
+    if (detailData) {
+      setTitle(detailData.title);
+      setBody(detailData.body);
+      setBlogId(detailData.id);
+    }
+  };
+
+  const handleCanceleEdit = () => {
+    setTypeModal("detail");
+    const detailData = data.find((item) => item.id == blogId);
     if (detailData) {
       setTitle(detailData.title);
       setBody(detailData.body);
     }
   };
 
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+    setTypeModal("create");
+  };
+
   const handleClose = () => {
     setIsOpenModal(false);
     setTitle("");
     setBody("");
+    setBlogId(0);
   };
 
   const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +105,7 @@ const MyBlogsPage = () => {
         <h1 className="text-xl font-bold text-white">My Blogs</h1>
         <button
           className="px-6 py-2 text-sm text-white bg-blue-500 rounded-xl"
-          onClick={() => setIsOpenModal(true)}
+          onClick={handleOpenModal}
         >
           Create new blog
         </button>
@@ -103,7 +123,7 @@ const MyBlogsPage = () => {
               title={result.title}
               body={result.body}
               user_id={result.user_id}
-              isCreate
+              isCreatePage
               openDetail={handleOpenDetail}
             />
           ))
@@ -113,10 +133,13 @@ const MyBlogsPage = () => {
         <ModalCreate
           title={title}
           body={body}
+          type={typeModal}
           changeTitle={changeTitle}
           changeBody={changeBody}
           handleClose={handleClose}
           handleSubmit={handleSubmit}
+          handleOpenEdit={() => setTypeModal("edit")}
+          handleCanceleEdit={handleCanceleEdit}
         />
       )}
     </div>

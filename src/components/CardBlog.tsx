@@ -5,7 +5,7 @@ type Props = {
   user_id?: number;
   title: string;
   body: string;
-  isCreate?: boolean;
+  isCreatePage?: boolean;
   openDetail: (_id: number) => void;
 };
 
@@ -14,7 +14,7 @@ const CardBlog = ({
   user_id,
   title,
   body,
-  isCreate,
+  isCreatePage,
   openDetail,
 }: Props) => {
   return (
@@ -28,7 +28,7 @@ const CardBlog = ({
         >
           {title}
         </h1>
-        {isCreate && (
+        {isCreatePage && (
           <div className="w-5 h-5">
             <button onClick={() => openDetail(post_id)}>
               <ChevronRight size={20} color="white" />

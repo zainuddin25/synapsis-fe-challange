@@ -16,8 +16,11 @@ export const blogSlice = createSlice({
     addBlog: (state, action: PayloadAction<BlogTypes>) => {
       state.value.push(action.payload);
     },
+    updateBlog: (state, action) => {
+      const detail = state.value.find((item) => item.id == action.payload.id);
+    },
   },
 });
 
-export const { addBlog } = blogSlice.actions;
+export const { addBlog, updateBlog } = blogSlice.actions;
 export default blogSlice.reducer;

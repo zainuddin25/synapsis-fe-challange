@@ -4,19 +4,25 @@ import { X } from "react-feather";
 type Props = {
   title: string;
   body: string;
+  type: string;
   changeTitle: (_event: ChangeEvent<HTMLInputElement>) => void;
   changeBody: (_event: ChangeEvent<HTMLTextAreaElement>) => void;
   handleClose: () => void;
   handleSubmit: (_event: ChangeEvent<HTMLFormElement>) => void;
+  handleOpenEdit: () => void;
+  handleCanceleEdit: () => void;
 };
 
 const ModalCreate = ({
   title,
   body,
+  type,
   changeTitle,
   changeBody,
   handleClose,
   handleSubmit,
+  handleOpenEdit,
+  handleCanceleEdit,
 }: Props) => {
   return (
     <div className="h-screen w-screen bg-black/20 backdrop-blur-sm fixed top-0 left-0 flex justify-center items-center">
@@ -38,6 +44,7 @@ const ModalCreate = ({
               className="border w-full px-3 py-2 text-sm outline-none rounded-md"
               value={title}
               onChange={changeTitle}
+              disabled={type == "detail"}
             />
           </div>
           <div className="flex flex-col gap-2 mt-4">
@@ -49,19 +56,63 @@ const ModalCreate = ({
               placeholder="Input blog body..."
               value={body}
               onChange={changeBody}
+              disabled={type == "detail"}
             ></textarea>
           </div>
           <div className="flex justify-end items-center gap-2 mt-4">
-            <button
-              className="px-6 py-2 border text-sm rounded-md"
-              type="button"
-              onClick={handleClose}
-            >
-              Cancel
-            </button>
-            <button className="px-6 py-2 text-sm rounded-md bg-blue-500 text-white">
-              Submit
-            </button>
+            {type == "create" ? (
+              <>
+                <button
+                  className="px-6 py-2 border text-sm rounded-md"
+                  type="button"
+                  onClick={handleClose}
+                >
+                  Cancel
+                </button>
+                <button className="px-6 py-2 text-sm rounded-md bg-blue-500 text-white">
+                  Submit
+                </button>
+              </>
+            ) : type == "detail" ? (
+              <>
+                <button
+                  className="px-6 py-2 border text-sm rounded-md"
+                  type="button"
+                  onClick={handleClose}
+                >
+                  Close
+                </button>
+                <button
+                  className="px-6 py-2 text-sm rounded-md bg-red-500 text-white"
+                  type="button"
+                  onClick={handleOpenEdit}
+                >
+                  Delete
+                </button>
+                <button
+                  className="px-6 py-2 text-sm rounded-md bg-blue-500 text-white"
+                  type="button"
+                  onClick={handleOpenEdit}
+                >
+                  Edit
+                </button>
+              </>
+            ) : type == "edit" ? (
+              <>
+                <button
+                  className="px-6 py-2 border text-sm rounded-md"
+                  type="button"
+                  onClick={handleCanceleEdit}
+                >
+                  Cancel
+                </button>
+                <button className="px-6 py-2 text-sm rounded-md bg-blue-500 text-white">
+                  Submit
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </form>
       </div>
