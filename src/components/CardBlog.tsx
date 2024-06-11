@@ -1,22 +1,12 @@
 import { ChevronRight, Edit, Edit2, Eye, Trash2 } from "react-feather";
 
 type Props = {
-  post_id: number;
   user_id?: number;
   title: string;
   body: string;
-  isCreate?: boolean;
-  openDetail: (_id: number) => void;
 };
 
-const CardBlog = ({
-  post_id,
-  user_id,
-  title,
-  body,
-  isCreate,
-  openDetail,
-}: Props) => {
+const CardBlog = ({ user_id, title, body }: Props) => {
   return (
     <div className="w-full h-full bg-white/10 p-4 border border-white/30 rounded-md hover:bg-white/30 duration-200 flex flex-col gap-2">
       <div className="flex gap-4 justify-between items-center">
@@ -29,22 +19,14 @@ const CardBlog = ({
           {title}
         </h1>
         <div className="w-5 h-5">
-          {isCreate ? (
-            <button onClick={() => openDetail(post_id)}>
-              <ChevronRight size={20} color="white" />
-            </button>
-          ) : (
-            <ChevronRight size={20} color="white" />
-          )}
+          <ChevronRight size={20} color="white" />
         </div>
       </div>
       <p className="text-sm font-medium text-white/80 line-wrap-line">{body}</p>
-      {!isCreate && (
-        <p className="text-sm font-light text-white text-white/80">
-          Created By:{" "}
-          <span className="underline text-white font-medium">{user_id}</span>
-        </p>
-      )}
+      <p className="text-sm font-light text-white text-white/80">
+        Created By:{" "}
+        <span className="underline text-white font-medium">{user_id}</span>
+      </p>
     </div>
   );
 };

@@ -34,6 +34,11 @@ const Header = () => {
           >
             Users
           </Link>
+          <Link href={"/my-blog"}>
+            <button className="bg-blue-500 text-sm px-6 py-2 rounded-xl text-white">
+              My Blogs
+            </button>
+          </Link>
         </div>
       </div>
     </div>
