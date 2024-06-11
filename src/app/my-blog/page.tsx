@@ -104,24 +104,14 @@ const MyBlogsPage = () => {
             <p className="text-white">Data Empety</p>
           </div>
         ) : (
-          <>
-            {data.map((result) => (
-              <Link href={`/blog/${result.id}`} key={result.id}>
-                <CardBlog
-                  title={result.title}
-                  body={result.body}
-                  user_id={result.user_id}
-                />
-              </Link>
-            ))}
-            <div className="mt-6 col-span-3">
-              <Pagination
-                currentPage={page}
-                nextPage={handleNextPage}
-                prevPage={handlePrevPage}
-              />
-            </div>
-          </>
+          data.map((result) => (
+            <CardBlog
+              key={result.id}
+              title={result.title}
+              body={result.body}
+              user_id={result.user_id}
+            />
+          ))
         )}
       </div>
       {isOpenModal && (
