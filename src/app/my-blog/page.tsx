@@ -26,33 +26,43 @@ const MyBlogsPage = () => {
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const data = {
-        title,
-        body,
-      };
-      const response = await axios.post(
-        `${apiUrl}/users/${user_id}/posts`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.status == 201) {
-        setIsOpenModal(false);
-        setReloadPage(!reloadPage);
-        setTitle("");
-        setBody("");
-        setTypeModal("");
-        const data: BlogTypes = {
-          id: response.data.id,
-          user_id: response.data.user_id,
-          title: response.data.title,
-          body: response.data.body,
+      if (typeModal == "edit") {
+        const data = {
+          id: blogId,
+          title,
+          body,
         };
-        dispatch(addBlog(data));
+        dispatch(updateBlog(data));
+        setIsOpenModal(false);
+      } else {
+        const data = {
+          title,
+          body,
+        };
+        const response = await axios.post(
+          `${apiUrl}/users/${user_id}/posts`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.status == 201) {
+          setIsOpenModal(false);
+          setReloadPage(!reloadPage);
+          setTitle("");
+          setBody("");
+          setTypeModal("");
+          const data: BlogTypes = {
+            id: response.data.id,
+            user_id: response.data.user_id,
+            title: response.data.title,
+            body: response.data.body,
+          };
+          dispatch(addBlog(data));
+        }
       }
     } catch (error) {
       console.log(error);
