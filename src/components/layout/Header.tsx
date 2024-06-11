@@ -6,7 +6,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-full py-6 px-10 bg-white/10 rounded-3xl flex justify-between items-center">
+    <div className="w-full py-6 px-10 bg-[#393e46] rounded-md flex justify-between items-center">
       <h1 className="text-xl font-bold tracking-wide text-white">
         Synapsis Blogs
       </h1>

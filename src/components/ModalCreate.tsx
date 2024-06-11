@@ -7,6 +7,7 @@ type Props = {
   changeTitle: (_event: ChangeEvent<HTMLInputElement>) => void;
   changeBody: (_event: ChangeEvent<HTMLTextAreaElement>) => void;
   handleClose: () => void;
+  handleSubmit: (_event: ChangeEvent<HTMLFormElement>) => void;
 };
 
 const ModalCreate = ({
@@ -15,6 +16,7 @@ const ModalCreate = ({
   changeTitle,
   changeBody,
   handleClose,
+  handleSubmit,
 }: Props) => {
   return (
     <div className="h-screen w-screen bg-black/20 backdrop-blur-sm fixed top-0 left-0 flex justify-center items-center">
@@ -26,7 +28,7 @@ const ModalCreate = ({
           </button>
         </div>
         <hr className="my-4" />
-        <form className="w-full">
+        <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
             <p className="text-xs text-black/50 font-semibold uppercase">
               Blog Title
