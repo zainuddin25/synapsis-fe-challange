@@ -71,7 +71,7 @@ const DetailPage = () => {
               Load Comment
             </button>
           </div>
-          <div className="w-full mt-8">
+          <div className="w-full mt-8 flex flex-col gap-2">
             {openComment && commentsData.length == 0 ? (
               <div className="w-full h-40 flex justify-center items-center border border-white/10 rounded-md">
                 <p className="text-white text-sm lg:text-base">
