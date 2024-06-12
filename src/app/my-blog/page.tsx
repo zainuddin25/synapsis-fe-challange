@@ -1,19 +1,19 @@
 "use client";
 import CardBlog from "@/components/CardBlog";
 import ModalCreate from "@/components/ModalCreate";
-import { addBlog, updateBlog } from "@/lib/features/blog";
+import { addBlog, deleteBlog, updateBlog } from "@/lib/features/blog";
 import { RootState } from "@/lib/store";
 import { BlogTypes } from "@/types";
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 const apiUrl = process.env.API_URL;
 const user_id = process.env.USER_ID;
 const token = process.env.AUTH_TOKEN;
 
 const MyBlogsPage = () => {
-  const [reloadPage, setReloadPage] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
@@ -34,6 +34,10 @@ const MyBlogsPage = () => {
         };
         dispatch(updateBlog(data));
         setIsOpenModal(false);
+        setTitle("");
+        setBody("");
+        setBlogId(0);
+        setTypeModal("");
       } else {
         const data = {
           title,
@@ -51,7 +55,6 @@ const MyBlogsPage = () => {
 
         if (response.status == 201) {
           setIsOpenModal(false);
-          setReloadPage(!reloadPage);
           setTitle("");
           setBody("");
           setTypeModal("");
@@ -65,10 +68,23 @@ const MyBlogsPage = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `Error ${error.response?.data[0].field} ${error.response?.data[0].message}`,
+        });
+      }
     }
   };
 
+  // Open modal create
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+    setTypeModal("create");
+  };
+
+  // Open modal detail
   const handleOpenDetail = (id: number) => {
     setIsOpenModal(true);
     setTypeModal("detail");
@@ -80,6 +96,7 @@ const MyBlogsPage = () => {
     }
   };
 
+  // Handle cancel edit
   const handleCanceleEdit = () => {
     setTypeModal("detail");
     const detailData = data.find((item) => item.id == blogId);
@@ -89,16 +106,22 @@ const MyBlogsPage = () => {
     }
   };
 
-  const handleOpenModal = () => {
-    setIsOpenModal(true);
-    setTypeModal("create");
-  };
-
+  // Close modal
   const handleClose = () => {
     setIsOpenModal(false);
     setTitle("");
     setBody("");
     setBlogId(0);
+  };
+
+  // Handle delete blog
+  const handleDeleteBlog = () => {
+    dispatch(deleteBlog(blogId));
+    setIsOpenModal(false);
+    setTitle("");
+    setBody("");
+    setBlogId(0);
+    setTypeModal("");
   };
 
   const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
@@ -150,6 +173,7 @@ const MyBlogsPage = () => {
           handleSubmit={handleSubmit}
           handleOpenEdit={() => setTypeModal("edit")}
           handleCanceleEdit={handleCanceleEdit}
+          handleDeleteBlog={handleDeleteBlog}
         />
       )}
     </div>
