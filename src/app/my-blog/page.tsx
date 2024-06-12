@@ -27,17 +27,37 @@ const MyBlogsPage = () => {
     event.preventDefault();
     try {
       if (typeModal == "edit") {
-        const data = {
-          id: blogId,
-          title,
-          body,
-        };
-        dispatch(updateBlog(data));
-        setIsOpenModal(false);
-        setTitle("");
-        setBody("");
-        setBlogId(0);
-        setTypeModal("");
+        if (title == "") {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `Error title can't be blank`,
+          });
+        } else if (body == "") {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `Error body can't be blank`,
+          });
+        } else if (body.length > 500) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `Error body is too long (maximum is 500 characters)`,
+          });
+        } else {
+          const data = {
+            id: blogId,
+            title,
+            body,
+          };
+          dispatch(updateBlog(data));
+          setIsOpenModal(false);
+          setTitle("");
+          setBody("");
+          setBlogId(0);
+          setTypeModal("");
+        }
       } else {
         const data = {
           title,
