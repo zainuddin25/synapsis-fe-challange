@@ -31,19 +31,19 @@ const MyBlogsPage = () => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: `Error title can't be blank`,
+            text: "Error title can't be blank",
           });
         } else if (body == "") {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: `Error body can't be blank`,
+            text: "Error body can't be blank",
           });
         } else if (body.length > 500) {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: `Error body is too long (maximum is 500 characters)`,
+            text: "Error body is too long (maximum is 500 characters)",
           });
         } else {
           const data = {
@@ -136,6 +136,11 @@ const MyBlogsPage = () => {
 
   // Handle delete blog
   const handleDeleteBlog = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Delete Success",
+      text: "Blog has been deleted",
+    });
     dispatch(deleteBlog(blogId));
     setIsOpenModal(false);
     setTitle("");
