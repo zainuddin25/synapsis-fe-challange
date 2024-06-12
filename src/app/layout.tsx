@@ -21,11 +21,11 @@ export default function RootLayout({
       <body className={poppins.className}>
         <StoreProvider>
           <div className="w-full">
-            <div className="container mx-auto">
-              <div className="w-full my-4 sticky top-4 z-50">
+            <div className="container mx-auto mb-4">
+              <div className="w-full sticky top-0 py-4 z-50 px-2 lg:px-0 bg-primary">
                 <Header />
               </div>
-              <div className="z-10">{children}</div>
+              <div className="z-10 px-2 lg:px-0">{children}</div>
             </div>
           </div>
         </StoreProvider>

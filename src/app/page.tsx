@@ -47,8 +47,8 @@ const Home = () => {
 
   return (
     <div className="w-full">
-      <div className="flex my-8">
-        <h1 className="text-xl font-bold text-white">All Blogs</h1>
+      <div className="flex mb-4">
+        <h1 className="text-base lg:text-xl font-bold text-white">All Blogs</h1>
       </div>
       {isLoading ? (
         <div className="w-full h-96 flex justify-center items-center">
@@ -56,7 +56,7 @@ const Home = () => {
         </div>
       ) : (
         <>
-          <div className=" grid grid-cols-3 gap-6 w-full">
+          <div className=" grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
             {data.map((result) => (
               <Link href={`/blog/${result.id}`} key={result.id}>
                 <CardBlog

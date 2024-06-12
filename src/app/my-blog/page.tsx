@@ -159,16 +159,16 @@ const MyBlogsPage = () => {
 
   return (
     <div className="w-full">
-      <div className="flex my-8 justify-between items-center">
-        <h1 className="text-xl font-bold text-white">My Blogs</h1>
+      <div className="flex mb-4 justify-between items-center">
+        <h1 className="text-base lg:text-xl font-bold text-white">My Blogs</h1>
         <button
-          className="px-6 py-2 text-sm text-white bg-blue-500 rounded-xl"
+          className="px-4 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm text-white bg-blue-500 rounded-xl"
           onClick={handleOpenModal}
         >
           Create new blog
         </button>
       </div>
-      <div className="grid grid-cols-3 gap-6 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
         {data.length == 0 ? (
           <div className="h-96 w-full flex justify-center items-center col-span-3">
             <p className="text-white">Data Empety</p>

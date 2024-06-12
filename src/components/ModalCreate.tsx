@@ -28,14 +28,17 @@ const ModalCreate = ({
 }: Props) => {
   return (
     <div className="h-screen w-screen bg-black/20 backdrop-blur-sm fixed top-0 left-0 flex justify-center items-center">
-      <div className="w-1/3 bg-white rounded-md px-4 py-3">
+      <div className="w-[90%] lg:w-1/3 bg-white rounded-md px-4 py-3">
         <div className="flex justify-between items-center">
-          <h1 className="text-lg">Create New Blog</h1>
-          <button className="p-2 border rounded-md" onClick={handleClose}>
+          <h1 className="text-base lg:text-lg">Create New Blog</h1>
+          <button
+            className="p-1 lg:p-2 border rounded-md"
+            onClick={handleClose}
+          >
             <X size={18} />
           </button>
         </div>
-        <hr className="my-4" />
+        <hr className="my-3 lg:my-4" />
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
             <p className="text-xs text-black/50 font-semibold uppercase">
@@ -65,34 +68,34 @@ const ModalCreate = ({
             {type == "create" ? (
               <>
                 <button
-                  className="px-6 py-2 border text-sm rounded-md"
+                  className="px-4 lg:px-6 py-1.5 lg:py-2 border text-xs lg:text-sm rounded-md"
                   type="button"
                   onClick={handleClose}
                 >
                   Cancel
                 </button>
-                <button className="px-6 py-2 text-sm rounded-md bg-blue-500 text-white">
+                <button className="px-4 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm rounded-md bg-blue-500 text-white">
                   Submit
                 </button>
               </>
             ) : type == "detail" ? (
               <>
                 <button
-                  className="px-6 py-2 border text-sm rounded-md"
+                  className="px-4 lg:px-6 py-1.5 lg:py-2 border text-xs lg:text-sm rounded-md"
                   type="button"
                   onClick={handleClose}
                 >
                   Close
                 </button>
                 <button
-                  className="px-6 py-2 text-sm rounded-md bg-red-500 text-white"
+                  className="px-4 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm rounded-md bg-red-500 text-white"
                   type="button"
                   onClick={handleDeleteBlog}
                 >
                   Delete
                 </button>
                 <button
-                  className="px-6 py-2 text-sm rounded-md bg-blue-500 text-white"
+                  className="px-4 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm rounded-md bg-blue-500 text-white"
                   type="button"
                   onClick={handleOpenEdit}
                 >
@@ -102,13 +105,13 @@ const ModalCreate = ({
             ) : type == "edit" ? (
               <>
                 <button
-                  className="px-6 py-2 border text-sm rounded-md"
+                  className="px-4 lg:px-6 py-1.5 lg:py-2 border text-xs lg:text-sm rounded-md"
                   type="button"
                   onClick={handleCanceleEdit}
                 >
                   Cancel
                 </button>
-                <button className="px-6 py-2 text-sm rounded-md bg-blue-500 text-white">
+                <button className="px-4 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm rounded-md bg-blue-500 text-white">
                   Submit
                 </button>
               </>

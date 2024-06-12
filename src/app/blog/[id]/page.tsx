@@ -47,18 +47,22 @@ const DetailPage = () => {
   };
 
   return (
-    <div className="w-full my-8 flex justify-center">
+    <div className="w-full my-4 lg:my-8 flex justify-center">
       {isLoading ? (
         <div className="w-full h-96 flex justify-center items-center">
           <h1 className="text-white">Loading...</h1>
         </div>
       ) : (
-        <div className="w-[40%]">
-          <h1 className="text-2xl font-bold text-white">{data?.title}</h1>
-          <p className="text-white/80 my-6">{data?.body}</p>
-          <div className="w-2/4 mx-auto">
+        <div className="w-[80%] lg:w-[40%]">
+          <h1 className="text-xl lg:text-2xl font-bold text-white">
+            {data?.title}
+          </h1>
+          <p className="text-sm lg:text-base text-white/80 my-2 lg:my-6">
+            {data?.body}
+          </p>
+          <div className="w-2/4 mx-auto mt-6 lg:mt-0">
             <button
-              className={`w-full py-2 border border-white/20 rounded-md text-white/20 text-sm font-medium ${
+              className={`w-full py-1.5 lg:py-2 border border-white/20 rounded-md text-white/20 text-xs lg:text-sm font-medium ${
                 openComment ? "cursor-not-allowed" : "cursor-pointer"
               }`}
               onClick={handleLoadCommnet}
@@ -70,7 +74,9 @@ const DetailPage = () => {
           <div className="w-full mt-8">
             {openComment && commentsData.length == 0 ? (
               <div className="w-full h-40 flex justify-center items-center border border-white/10 rounded-md">
-                <p className="text-white">Comment not found</p>
+                <p className="text-white text-sm lg:text-base">
+                  Comment not found
+                </p>
               </div>
             ) : (
               commentsData.map((result) => (

@@ -10,12 +10,12 @@ const CardComment = ({ name, email, body }: Props) => {
   return (
     <div className="w-full p-4 border border-white/10 rounded-md duration-200">
       <div className="w-full">
-        <h1 className="text-lg font-semibold text-white tracking-wider">
+        <h1 className="text-base lg:text-lg font-semibold text-white tracking-wider">
           {name}
         </h1>
         <p className="text-xs text-white/50">{email}</p>
         <div className="mt-4">
-          <p className="font-medium text-white">{body}</p>
+          <p className="text-sm lg:text-base font-medium text-white">{body}</p>
         </div>
       </div>
     </div>
