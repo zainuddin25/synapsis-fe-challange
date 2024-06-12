@@ -11,6 +11,7 @@ type Props = {
   handleSubmit: (_event: ChangeEvent<HTMLFormElement>) => void;
   handleOpenEdit: () => void;
   handleCanceleEdit: () => void;
+  handleDeleteBlog: () => void;
 };
 
 const ModalCreate = ({
@@ -23,6 +24,7 @@ const ModalCreate = ({
   handleSubmit,
   handleOpenEdit,
   handleCanceleEdit,
+  handleDeleteBlog,
 }: Props) => {
   return (
     <div className="h-screen w-screen bg-black/20 backdrop-blur-sm fixed top-0 left-0 flex justify-center items-center">
@@ -85,7 +87,7 @@ const ModalCreate = ({
                 <button
                   className="px-6 py-2 text-sm rounded-md bg-red-500 text-white"
                   type="button"
-                  onClick={handleOpenEdit}
+                  onClick={handleDeleteBlog}
                 >
                   Delete
                 </button>
