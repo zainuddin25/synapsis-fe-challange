@@ -26,6 +26,25 @@ export const userSlice = createSlice({
     addUser: (state, action) => {
       state.value.data.unshift(action.payload);
     },
+    updateUser: (state, action: PayloadAction<UserTypes>) => {
+      const { name, email, gender, id, status } = action.payload;
+      const index = state.value.data.findIndex((user) => user.id === id);
+      console.log(index);
+      if (index !== -1) {
+        state.value.data[index] = {
+          ...state.value.data[index],
+          name,
+          email,
+          gender,
+          status,
+        };
+      }
+    },
+    deleteDataUser: (state, action: PayloadAction<number>) => {
+      state.value.data = state.value.data.filter(
+        (user) => user.id !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.pending, (state) => {
@@ -46,5 +65,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { addUser } = userSlice.actions;
+export const { addUser, updateUser, deleteDataUser } = userSlice.actions;
 export default userSlice.reducer;

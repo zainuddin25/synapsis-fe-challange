@@ -1,6 +1,6 @@
 "use client";
 import CardBlog from "@/components/CardBlog";
-import ModalCreate from "@/components/ModalCreate";
+import ModalCreate from "@/components/blog/ModalCreate";
 import { addBlog, deleteBlog, updateBlog } from "@/lib/features/blog";
 import { RootState } from "@/lib/store";
 import { BlogTypes } from "@/types";

@@ -2,9 +2,12 @@ import { UserTypes } from "@/types";
 
 type Props = {
   data: UserTypes[];
+  openDetail: (_id: number) => void;
+  openEdit: (_id: number) => void;
+  deleteUser: (_id: number) => void;
 };
 
-const Table = ({ data }: Props) => {
+const Table = ({ data, openDetail, openEdit, deleteUser }: Props) => {
   return (
     <div className="overflow-x-auto" id="container-table">
       <table className="min-w-full">
@@ -52,19 +55,19 @@ const Table = ({ data }: Props) => {
                 <div className="w-full flex justify-center items-center">
                   <button
                     className="text-xs lg:text-sm bg-blue-500 hover:bg-blue-700 text-white font-semibold px-4 lg:px-6 py-1.5 lg:py-2 rounded mr-2"
-                    //   onClick={() => onDetail(result.id)}
+                    onClick={() => openDetail(result.id)}
                   >
                     Detail
                   </button>
                   <button
                     className="text-xs lg:text-sm bg-red-500 hover:bg-red-700 text-white font-semibold px-4 lg:px-6 py-1.5 lg:py-2 rounded mr-2"
-                    //   onClick={() => onDelete(user.id)}
+                    onClick={() => deleteUser(result.id)}
                   >
                     Delete
                   </button>
                   <button
                     className="text-xs lg:text-sm bg-green-500 hover:bg-green-700 text-white font-semibold px-4 lg:px-6 py-1.5 lg:py-2 rounded mr-2"
-                    //   onClick={() => onEdit(user.id)}
+                    onClick={() => openEdit(result.id)}
                   >
                     Edit
                   </button>
