@@ -9,26 +9,26 @@ type Props = {
 
 const Table = ({ data, openDetail, openEdit, deleteUser }: Props) => {
   return (
-    <div className="overflow-x-auto" id="container-table">
+    <div className="overflow-x-auto border rounded-xl" id="container-table">
       <table className="min-w-full">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b text-white font-normal text-start">
+            <th className="py-4 px-4 border-b text-white font-normal text-start">
               ID
             </th>
-            <th className="py-2 px-4 border-b text-white font-normal text-start">
+            <th className="py-4 px-4 border-b text-white font-normal text-start">
               Name
             </th>
-            <th className="py-2 px-4 border-b text-white font-normal text-start">
+            <th className="py-4 px-4 border-b text-white font-normal text-start">
               Email
             </th>
-            <th className="py-2 px-4 border-b text-white font-normal text-start">
+            <th className="py-4 px-4 border-b text-white font-normal text-start">
               Gender
             </th>
-            <th className="py-2 px-4 border-b text-white font-normal text-start">
+            <th className="py-4 px-4 border-b text-white font-normal text-start">
               Status
             </th>
-            <th className="py-2 px-4 border-b text-white font-normal">
+            <th className="py-4 px-4 border-b text-white font-normal">
               Action
             </th>
           </tr>
