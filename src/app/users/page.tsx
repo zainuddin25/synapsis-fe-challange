@@ -3,7 +3,12 @@ import Table from "@/components/Table";
 import ModalCreateUser from "@/components/user/ModalCreate";
 import { limitData } from "@/helper/limitData";
 import { fetchUsers } from "@/lib/action/user";
-import { addUser, deleteDataUser, updateUser } from "@/lib/features/user";
+import {
+  addUser,
+  deleteDataUser,
+  searchUser,
+  updateUser,
+} from "@/lib/features/user";
 import { RootState, useAppDispatch } from "@/lib/store";
 import axios from "axios";
 import React, { ChangeEvent, useEffect, useState } from "react";
@@ -21,16 +26,30 @@ const UsersPage = () => {
   const [gender, setGender] = useState<string>("male");
   const [status, setStatus] = useState<string>("active");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [valueSearch, setValueSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
   const [startData, setStartData] = useState<number>(0);
   const [endData, setEndData] = useState<number>(9);
   const dispatch = useAppDispatch();
   const { data, loading, error } = useSelector(
     (state: RootState) => state.user.value
   );
+  const searchData = useSelector(
+    (state: RootState) => state.user.value.searchData
+  );
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
+
+  useEffect(() => {
+    const debounceSearch = setTimeout(() => {
+      dispatch(searchUser(valueSearch));
+      setSearch(valueSearch);
+    }, 500);
+
+    return () => clearTimeout(debounceSearch);
+  }, [valueSearch, dispatch]);
 
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -147,6 +166,10 @@ const UsersPage = () => {
     setStatus(event.target.value);
   };
 
+  const changeSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setValueSearch(event.target.value);
+  };
+
   const openCreateModal = () => {
     setIsOpen(true);
     setType("create");
@@ -198,20 +221,36 @@ const UsersPage = () => {
     <div className="w-full">
       <div className="flex mb-4 justify-between items-center">
         <h1 className="text-base lg:text-xl font-bold text-white">All Users</h1>
-        <button
-          className="px-4 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm text-white bg-blue-500 rounded-xl"
-          onClick={openCreateModal}
-        >
-          Create new user
-        </button>
+        <div className="flex items-center gap-4">
+          <input
+            placeholder="Search user name..."
+            className="w-40 lg:w-80 px-4 py-2 text-sm outline-none rounded-xl bg-white/20 text-white"
+            value={valueSearch}
+            onChange={changeSearch}
+          />
+          <button
+            className="px-4 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm text-white bg-blue-500 rounded-xl"
+            onClick={openCreateModal}
+          >
+            Create new user
+          </button>
+        </div>
       </div>
       {loading ? (
         <div className="w-full h-96 flex justify-center items-center">
           <h1 className="text-white">Loading...</h1>
         </div>
+      ) : data.length == 0 || searchData.length == 0 ? (
+        <div className="w-full h-96 flex justify-center items-center">
+          <h1 className="text-white">Data not found</h1>
+        </div>
       ) : (
         <Table
-          data={limitData({ data, start: startData, end: endData })}
+          data={limitData({
+            data: search == "" ? data : searchData,
+            start: startData,
+            end: endData,
+          })}
           openDetail={openDetail}
           openEdit={openEdit}
           deleteUser={deleteUser}

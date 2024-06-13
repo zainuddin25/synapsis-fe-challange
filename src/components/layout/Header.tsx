@@ -1,6 +1,9 @@
 "use client";
+import { searchUser } from "@/lib/features/user";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const pathname = usePathname();
@@ -11,12 +14,6 @@ const Header = () => {
         Synapsis Blogs
       </h1>
       <div className="flex gap-8 items-center">
-        {pathname.includes("users") && (
-          <input
-            placeholder="Search user name..."
-            className="w-80 px-4 py-2 text-sm outline-none rounded-xl bg-white/20 text-white lg:block hidden"
-          />
-        )}
         <div className="flex items-center justify-center gap-4">
           <Link
             href={"/"}

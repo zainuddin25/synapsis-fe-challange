@@ -6,6 +6,7 @@ import { fetchUsers } from "../action/user";
 type StateType = {
   value: {
     data: UserTypes[];
+    searchData: UserTypes[];
     loading: boolean;
     error: string | null;
   };
@@ -14,6 +15,7 @@ type StateType = {
 const initialState: StateType = {
   value: {
     data: [],
+    searchData: [],
     loading: false,
     error: null,
   },
@@ -44,6 +46,15 @@ export const userSlice = createSlice({
         (user) => user.id !== action.payload
       );
     },
+    searchUser: (state, action: PayloadAction<string>) => {
+      const query = action.payload;
+      const dataSearch = state.value.data.filter((item) =>
+        item.name.toLowerCase().includes(query)
+      );
+      if (dataSearch) {
+        state.value.searchData = dataSearch;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.pending, (state) => {
@@ -64,5 +75,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { addUser, updateUser, deleteDataUser } = userSlice.actions;
+export const { addUser, updateUser, deleteDataUser, searchUser } =
+  userSlice.actions;
 export default userSlice.reducer;
