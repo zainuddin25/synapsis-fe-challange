@@ -1,6 +1,8 @@
 "use client";
 import Table from "@/components/Table";
+import { limitData } from "@/helper/limitData";
 import { fetchUsers } from "@/lib/action/user";
+import { addUser } from "@/lib/features/user";
 import { RootState, useAppDispatch } from "@/lib/store";
 import { UserTypes } from "@/types";
 import axios from "axios";
@@ -8,6 +10,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const UsersPage = () => {
+  const [startData, setStartData] = useState<number>(0);
+  const [endData, setEndData] = useState<number>(9);
   const dispatch = useAppDispatch();
   const { data, loading, error } = useSelector(
     (state: RootState) => state.user.value
@@ -27,7 +31,7 @@ const UsersPage = () => {
           <h1 className="text-white">Loading...</h1>
         </div>
       ) : (
-        <Table data={data} />
+        <Table data={limitData({ data, start: startData, end: endData })} />
       )}
     </div>
   );
