@@ -2,8 +2,10 @@
 import CardComment from "@/components/CardComment";
 import { BlogTypes, CommentTypes } from "@/types";
 import axios from "axios";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { ChevronLeft } from "react-feather";
 import Swal from "sweetalert2";
 
 const apiUrl = process.env.API_URL;
@@ -67,7 +69,13 @@ const DetailPage = () => {
         </div>
       ) : (
         <div className="w-[80%] lg:w-[40%]">
-          <h1 className="text-xl lg:text-2xl font-bold text-white">
+          <Link href={"/"}>
+            <div className="flex gap-2 items-center text-white">
+              <ChevronLeft />
+              <span>Back</span>
+            </div>
+          </Link>
+          <h1 className="text-xl lg:text-2xl font-bold text-white mt-8">
             {data?.title}
           </h1>
           <p className="text-sm lg:text-base text-white/80 my-2 lg:my-6">
