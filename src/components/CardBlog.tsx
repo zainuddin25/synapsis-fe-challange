@@ -39,10 +39,22 @@ const CardBlog = ({
       <p className="text-xs lg:text-sm font-medium text-white/80 line-wrap-line">
         {body}
       </p>
-      <p className="text-xs lg:text-sm font-light text-white text-white/80">
-        Created By:{" "}
-        <span className="underline text-white font-medium">{user_id}</span>
-      </p>
+      <div className="flex justify-between items-center mt-2">
+        <p className="text-xs lg:text-sm font-light text-white text-white/80">
+          Created By:{" "}
+          <span className="underline text-white font-medium">{user_id}</span>
+        </p>
+        {isCreatePage ? (
+          <button
+            className="text-xs lg:text-sm underline text-white"
+            onClick={() => openDetail(post_id)}
+          >
+            Read More
+          </button>
+        ) : (
+          <p className="text-xs lg:text-sm underline text-white">Read More</p>
+        )}
+      </div>
     </div>
   );
 };
