@@ -168,7 +168,7 @@ const MyBlogsPage = () => {
           Create new blog
         </button>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
         {data.length == 0 ? (
           <div className="h-96 w-full flex justify-center items-center col-span-3">
             <p className="text-white">Data Empety</p>
