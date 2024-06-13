@@ -12,3 +12,11 @@ export type CommentTypes = {
   email: string;
   body: string;
 };
+
+export type UserTypes = {
+  id: number,
+  name: string,
+  email: string,
+  gender: string,
+  status: string
+}

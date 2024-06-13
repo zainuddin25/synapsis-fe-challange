@@ -24,3 +24,7 @@ body::-webkit-scrollbar {
   -webkit-line-clamp: 4;
   max-height: 4em;
 }
+
+#container-table::-webkit-scrollbar {
+  display: none;
+}
