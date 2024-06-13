@@ -5,6 +5,7 @@ import { BlogTypes } from "@/types";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const apiUrl = process.env.API_URL;
 
@@ -26,7 +27,13 @@ const Home = () => {
           setIsLoading(false);
         }
       } catch (error) {
-        console.log(error);
+        if (axios.isAxiosError(error)) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `Error ${error.response?.data[0].field} ${error.response?.data[0].message}`,
+          });
+        }
       }
     };
 

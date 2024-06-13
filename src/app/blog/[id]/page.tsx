@@ -4,6 +4,7 @@ import { BlogTypes, CommentTypes } from "@/types";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const apiUrl = process.env.API_URL;
 
@@ -27,7 +28,13 @@ const DetailPage = () => {
           setOpenComment(false);
         }
       } catch (error) {
-        console.log(error);
+        if (axios.isAxiosError(error)) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `Error ${error.response?.data[0].field} ${error.response?.data[0].message}`,
+          });
+        }
       }
     };
 
@@ -42,7 +49,13 @@ const DetailPage = () => {
         setCommentsData(response.data);
       }
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `Error ${error.response?.data[0].field} ${error.response?.data[0].message}`,
+        });
+      }
     }
   };
 

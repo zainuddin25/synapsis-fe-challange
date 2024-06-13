@@ -98,13 +98,11 @@ const MyBlogsPage = () => {
     }
   };
 
-  // Open modal create
   const handleOpenModal = () => {
     setIsOpenModal(true);
     setTypeModal("create");
   };
 
-  // Open modal detail
   const handleOpenDetail = (id: number) => {
     setIsOpenModal(true);
     setTypeModal("detail");
@@ -116,7 +114,6 @@ const MyBlogsPage = () => {
     }
   };
 
-  // Handle cancel edit
   const handleCanceleEdit = () => {
     setTypeModal("detail");
     const detailData = data.find((item) => item.id == blogId);
@@ -126,7 +123,6 @@ const MyBlogsPage = () => {
     }
   };
 
-  // Close modal
   const handleClose = () => {
     setIsOpenModal(false);
     setTitle("");
@@ -134,7 +130,6 @@ const MyBlogsPage = () => {
     setBlogId(0);
   };
 
-  // Handle delete blog
   const handleDeleteBlog = () => {
     Swal.fire({
       icon: "success",
