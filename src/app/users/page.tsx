@@ -69,23 +69,38 @@ const UsersPage = () => {
           });
         }
       } else if (type == "edit") {
-        const data = {
-          id: userId,
-          email,
-          name,
-          gender,
-          status,
-        };
-        dispatch(updateUser(data));
-        Swal.fire({
-          icon: "success",
-          title: "Update Success",
-          text: `${name} has been updated`,
-        });
-        setIsOpen(false);
-        setName("");
-        setEmail("");
-        setGender("male");
+        if (email == "") {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error email can't be blank",
+          });
+        } else if (name == "") {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error email can't be blank",
+          });
+        } else {
+          const data = {
+            id: userId,
+            email,
+            name,
+            gender,
+            status,
+          };
+          dispatch(updateUser(data));
+          Swal.fire({
+            icon: "success",
+            title: "Update Success",
+            text: `${name} has been updated`,
+          });
+          setIsOpen(false);
+          setName("");
+          setEmail("");
+          setGender("male");
+        }
+
         setStatus("active");
       }
     } catch (error) {
