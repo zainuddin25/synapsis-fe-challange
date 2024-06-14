@@ -1,4 +1,5 @@
 "use client";
+import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import ModalCreateUser from "@/components/user/ModalCreate";
 import { limitData } from "@/helper/limitData";
@@ -29,7 +30,6 @@ const UsersPage = () => {
   const [valueSearch, setValueSearch] = useState<string>("");
   const [search, setSearch] = useState<string>("");
   const [startData, setStartData] = useState<number>(0);
-  const [endData, setEndData] = useState<number>(9);
   const dispatch = useAppDispatch();
   const { data, loading, error } = useSelector(
     (state: RootState) => state.user.value
@@ -217,6 +217,8 @@ const UsersPage = () => {
     setStatus("active");
   };
 
+  console.log(startData);
+
   return (
     <div className="w-full">
       <div className="flex mb-4 justify-between items-center">
@@ -245,16 +247,28 @@ const UsersPage = () => {
           <h1 className="text-white">Data not found</h1>
         </div>
       ) : (
-        <Table
-          data={limitData({
-            data: search == "" ? data : searchData,
-            start: startData,
-            end: endData,
-          })}
-          openDetail={openDetail}
-          openEdit={openEdit}
-          deleteUser={deleteUser}
-        />
+        <>
+          <Table
+            data={limitData({
+              data: search == "" ? data : searchData,
+              start: startData,
+              end: startData + 9,
+            })}
+            openDetail={openDetail}
+            openEdit={openEdit}
+            deleteUser={deleteUser}
+          />
+          <div className="mt-6">
+            <Pagination
+              currentPage={startData}
+              nextPage={() => setStartData(startData + 10)}
+              prevPage={() =>
+                startData == 0 ? setStartData(0) : setStartData(startData - 10)
+              }
+              isEnd={startData + 10 == 100}
+            />
+          </div>
+        </>
       )}
       {isOpen && (
         <ModalCreateUser
