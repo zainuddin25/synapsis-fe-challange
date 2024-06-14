@@ -72,6 +72,8 @@ This project uses the following libraries and frameworks:
 
 The project structure is as follows:
 
+There is information in each folder
+
 - [public/](https://github.com/zainuddin25/synapsis-fe-challange/tree/master/public)
 - [src/](https://github.com/zainuddin25/synapsis-fe-challange/tree/master/src)
   - [app/](https://github.com/zainuddin25/synapsis-fe-challange/tree/master/src/app)
