@@ -22,10 +22,10 @@ const Table = ({ data, openDetail, openEdit, deleteUser }: Props) => {
             <th className="py-4 px-4 border-b text-white font-normal text-start">
               Email
             </th>
-            <th className="py-4 px-4 border-b text-white font-normal text-start">
+            <th className="py-4 px-4 border-b text-white font-normal">
               Gender
             </th>
-            <th className="py-4 px-4 border-b text-white font-normal text-start">
+            <th className="py-4 px-4 border-b text-white font-normal">
               Status
             </th>
             <th className="py-4 px-4 border-b text-white font-normal">
@@ -45,13 +45,22 @@ const Table = ({ data, openDetail, openEdit, deleteUser }: Props) => {
               <td className="py-2 px-4 border-b text-white h-14 truncate">
                 {result.email}
               </td>
-              <td className="py-2 px-4 border-b text-white h-14">
+              <td
+                className="py-2 px-4 border-b text-white h-14 capitalize"
+                align="center"
+              >
                 {result.gender}
               </td>
-              <td className="py-2 px-4 border-b text-white h-14">
-                {result.status}
+              <td className="py-2 px-4 border-b text-white h-14" align="center">
+                <p
+                  className={`p-3 py-1 ${
+                    result.status == "active" ? "bg-blue-500" : "bg-slate-500"
+                  } text-sm capitalize rounded-full`}
+                >
+                  {result.status}
+                </p>
               </td>
-              <td className="py-2 px-4 border-b ">
+              <td className="py-2 px-4 border-b">
                 <div className="w-full flex justify-center items-center">
                   <button
                     className="text-xs lg:text-sm bg-blue-500 hover:bg-blue-700 text-white font-semibold px-4 lg:px-6 py-1.5 lg:py-2 rounded mr-2"

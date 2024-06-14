@@ -217,8 +217,6 @@ const UsersPage = () => {
     setStatus("active");
   };
 
-  console.log(startData);
-
   return (
     <div className="w-full">
       <div className="flex mb-4 justify-between items-center">
