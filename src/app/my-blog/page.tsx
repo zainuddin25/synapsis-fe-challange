@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 
 const apiUrl = process.env.API_URL;
 const user_id = process.env.USER_ID;
-const token = process.env.AUTH_TOKEN;
+const token = process.env.ACCESS_TOKEN;
 
 const MyBlogsPage = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);

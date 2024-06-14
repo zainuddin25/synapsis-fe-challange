@@ -5,8 +5,6 @@ const nextConfig = {
     ACCESS_TOKEN:
       "8a8c5a5543da4c0fc32cd610fb3082dadfa2395d3f46a236af4fd1e761cdd467",
     USER_ID: 6958440,
-    AUTH_TOKEN:
-      "8a8c5a5543da4c0fc32cd610fb3082dadfa2395d3f46a236af4fd1e761cdd467",
   },
 };
 

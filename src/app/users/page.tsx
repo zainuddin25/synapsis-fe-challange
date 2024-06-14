@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 const apiUrl = process.env.API_URL;
-const token = process.env.AUTH_TOKEN;
+const token = process.env.ACCESS_TOKEN;
 
 const UsersPage = () => {
   const [type, setType] = useState<string>("");

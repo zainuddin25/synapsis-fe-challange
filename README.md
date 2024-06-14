@@ -83,3 +83,13 @@ The project structure is as follows:
 ## Deployment
 
 This project is deployed using [Vercel](https://vercel.com/), a platform for static sites and serverless functions.
+
+## Environment Variables
+
+In file [next.config.mjs](https://github.com/zainuddin25/synapsis-fe-challange/blob/master/next.config.mjs) to edit env
+
+- API_URL
+  public api endpoint
+- ACCESS_TOKEN:
+  token used to access the api. go to [gorest.co.id](https://gorest.co.in/consumer/login) to generate access token
+- USER_ID: User ID is used as the default user when creating a blog. The user ID can be obtained by creating a new user or taking it from the list of registered users. [List User](https://gorest.co.in/public/v2/users) to get the user ID
